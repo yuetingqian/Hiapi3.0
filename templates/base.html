@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Hiapi</title>
+    <link href="/static/css/bootstrap.css" rel="stylesheet">
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      body {
+        padding-top: 50px;
+      }
+      .starter-template {
+        padding: 40px 15px;
+        text-align: center;
+      }
+    </style>
+    ${self.header()}
+  </head>
+  <body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="../" class="navbar-brand" style="font-size:40px">Hiapi</a>
+      </div>
+      <div class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+        <ul class="nav navbar-nav" style="font-size:18px">
+          ${show_header()}
+        </ul>
+        <div class="navbar-form navbar-right">
+            <div class="form-group">
+              <input type="text" placeholder="Email" class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="password" placeholder="Password" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">Sign in</button>
+            <div class="form-group">ddd</div>
+
+          </div>
+        <form class="navbar-form navbar-right">
+          <li class="form-group">Login</li>
+        </form> 
+      </div>
+    </div>
+    </div>
+          ${self.body()}
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/static/js/jquery.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+  </body>
+</html>
+
+<%def name="show_header()">
+<%
+header = [
+["Test","/test"],
+["Auto","/auto"],
+["Report","/report"]
+]
+import web
+path = web.ctx.path
+path_list = path.split('/')
+if len(path_list) > 1:
+  tag = path_list[1]
+else:
+  tag = path_list[0]
+%>
+% for item in header:
+<li class="
+% if tag == item[0].lower():
+  active
+% endif
+"><a href="${item[1]}">${item[0]}</a></li>
+% endfor
+
+</%def>

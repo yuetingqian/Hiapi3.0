@@ -1,4 +1,5 @@
 __author__ = 'yuetingqian'
+#-*- coding: utf-8 -*-
 import web
 from web.contrib.template import render_mako
 
