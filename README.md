@@ -21,6 +21,7 @@ $project_root
 ```
 
 
+以下代码规范抄袭gitcorp ^ ^
 ## Python
 
 原则上遵守[PEP8](http://www.python.org/dev/peps/pep-0008/)。
@@ -114,11 +115,6 @@ def create_user(username, display_name='', email=''):
  * ***正则表达式*** **使用原生的双引号** `r"..."`
  * ***文档字符*** **使用三个双引号** `"""......"""`
 
-## JavaScript
-
-JS模块支持[Asynchronous Module Definition](https://github.com/amdjs/amdjs-api/wiki/AMD)。
-
-项目中我们使用[RequireJS](http://requirejs.org/)作为JS加载器
 
 ### 缩进
 
@@ -136,4 +132,3 @@ JS模块支持[Asynchronous Module Definition](https://github.com/amdjs/amdjs-ap
 
 采用 **2个空格** 的缩进
 
-以上代码规范抄袭gitcorp ^ ^
