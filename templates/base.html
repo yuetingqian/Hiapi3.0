@@ -5,15 +5,7 @@
     <title>Hiapi</title>
     <link href="/static/css/bootstrap.css" rel="stylesheet">
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-      body {
-        padding-top: 50px;
-      }
-      .starter-template {
-        padding: 40px 15px;
-        text-align: center;
-      }
-    </style>
+    <link href="/static/css/main.css" rel="stylesheet">
     ${self.header()}
   </head>
   <body>
@@ -26,11 +18,15 @@
           <span class="icon-bar"></span>
         </button>
         <a href="../" class="navbar-brand" style="font-size:40px">Hiapi</a>
-      </div>
+      </div><! --div navbar-header-->
       <div class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
         <ul class="nav navbar-nav" style="font-size:18px">
           ${show_header()}
         </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a>Login</a></li>
+        </ul>
+
         <div class="navbar-form navbar-right">
             <div class="form-group">
               <input type="text" placeholder="Email" class="form-control">
@@ -39,15 +35,11 @@
               <input type="password" placeholder="Password" class="form-control">
             </div>
             <button type="submit" class="btn btn-success">Sign in</button>
-            <div class="form-group">ddd</div>
+        </div>
+      </div> <!-- div collapse -->
+    </div> <!-- div container-->
+    </div> <!-- div navbar-->
 
-          </div>
-        <form class="navbar-form navbar-right">
-          <li class="form-group">Login</li>
-        </form> 
-      </div>
-    </div>
-    </div>
           ${self.body()}
     <!-- Bootstrap core JavaScript
     ================================================== -->
