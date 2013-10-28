@@ -115,6 +115,7 @@ def create_user(username, display_name='', email=''):
  * ***正则表达式*** **使用原生的双引号** `r"..."`
  * ***文档字符*** **使用三个双引号** `"""......"""`
 
+## JavaScript
 
 ### 缩进
 
