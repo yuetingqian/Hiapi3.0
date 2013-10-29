@@ -14,6 +14,9 @@ class Index:
             tag = path_list[0]
         print path_list
         from dao import query
-        app = query.get_apps()
-
+        app = list(query.get_apps())
+        for i in app:
+            print i
+        print app[0]
+        print type(app)
         return render.index(name=name,app=app)
