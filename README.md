@@ -10,9 +10,9 @@ Hiapi version 3.0
   Mako (`cd Mako-0.8.0 && python setup.py install`)
 
 
-###database
+###Database
 ```
-cd dao/create.sql
+cd dao
 mysql -u hiapi -pmobileqa654321 Hiapi3 < create.sql
 ```
 
