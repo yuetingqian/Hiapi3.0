@@ -10,11 +10,27 @@ Hiapi version 3.0
   Mako (`cd Mako-0.8.0 && python setup.py install`)
 
 
+###database
+```
+cd dao/create.sql
+mysql -u hiapi -pmobileqa654321 Hiapi3 < create.sql
+```
+
+
+如果本地没有Hiapi3数据库先自己建一个
+
+```
+create database Hiapi3
+```
+
+
+
 ###结构
 ```text
 $project_root
 | - config/        # 配置文件
 | - controllers/   # MVC-C
+| - dao/           # db操作
 | - static/        # 资源文件 
 | - templates/     # MVC-V
 | - server.py      # 启动服务
