@@ -13,5 +13,7 @@ class Index:
         else:
             tag = path_list[0]
         print path_list
+        from dao import query
+        app = query.get_apps()
 
-        return render.index(name=name)
+        return render.index(name=name,app=app)

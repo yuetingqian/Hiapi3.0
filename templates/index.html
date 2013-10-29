@@ -5,5 +5,9 @@
 <%block name="body">
 <div class="starter-template">
   <p>123</p>${name}
+% for item in app:
+  ${item['name']}
+% endfor
+
 </div>
 </%block>

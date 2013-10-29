@@ -3,5 +3,5 @@ import web
 
 def getConnection():
     '''get connection of database'''
-    db = web.database(dbn='mysql',db='hiapi',user='root',pw='root',host='192.168.190.51',port=3306);
+    db = web.database(dbn='mysql',db='Hiapi3',user='root',pw='password',host='localhost',port=3306);
     return db
