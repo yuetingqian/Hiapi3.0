@@ -2,14 +2,14 @@
 def get_output_name(str):
     name = ''
     str_list = str.split('|')
-    len = len(str_list)
+    strlen = len(str_list)
 
-    if len > 1:
-        name = str_list[len-1]
+    if strlen > 1:
+        name = str_list[strlen-1]
 
     return name
 
 def get_output_parent(str):
-    pos = len(get_output_name(str))
+    pos = len(get_output_name(str)) + 1
     parent = str[:-pos]
     return parent
