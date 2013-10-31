@@ -18,6 +18,6 @@ class Index:
         sjson = hcurl.curl_get(url)
         djson = json.JSONDecoder(object_pairs_hook=collections.OrderedDict).decode(sjson)
         djson = json.loads(sjson, object_pairs_hook=collections.OrderedDict)
-        re = hjson.parser(outputs, djson, 'root', ['root|properties|#int#|id'],0)
+        re = hjson.parser(outputs, djson, ['root|properties|#int#|id'],0)
 
-        return render.test(json=re[0])
+        return render.test(json=re[0],error=re[1])

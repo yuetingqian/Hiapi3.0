@@ -7,13 +7,26 @@ from dao import query
 
 parent = 'root'
 tr = []
-def parser(outputs, json, parent=parent, tr=tr, api_id=0, html='',error='', index=0):
+def parser(outputs, json,tr=tr, api_id=0, parent=parent, html='',error='', index=0):
+    '''
+
+    用来返回json解析结果或者插入json的函数，若只需要展示，只需填入前三个参数
+    outputs  params_outputs中api返回参数
+    json     curl api后json.loads后的结果
+    tr       apis表中tr
+    api_id   当该参数大于0时，若param_outputs中没有可自动插入json里的返回值
+    parent   一般是root
+    html     展示的html
+    error    解析过程中的报错，包括字段缺失，类型不符等
+    index    表示结果序号，比如第几套房源
+
+    '''
     if isinstance(json, dict):
         for key in json:
-            [html, error, outputs, index] = parser(outputs, json[key], parent+'|'+key, tr, api_id, html, error, index)
+            [html, error, outputs, index] = parser(outputs, json[key],tr, api_id, parent+'|'+key, html, error, index)
     elif isinstance(json, list):
         for item in json:
-            [html, error, outputs, index] = parser(outputs, item, parent+'|#int#', tr , api_id, html, error, index)
+            [html, error, outputs, index] = parser(outputs, item, tr, api_id, parent+'|#int#', html, error, index)
     else:
         match = False
         name_t   = hstring.get_output_name(parent)
