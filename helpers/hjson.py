@@ -3,16 +3,18 @@ import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
 from helpers import hstring
+from dao import query
 
 parent = 'root'
-
-def parser(json, outputs, parent=parent, tr=['root|properties|#int#|id'], html='', index=0):
+tr = []
+def parser(api_id, outputs, json, parent=parent, tr=tr, is_insert=False, html='', index=0):
+    #outputs = query.get_outputs(api_id)
     if isinstance(json, dict):
         for key in json:
-            [html, index] = parser(json[key], outputs, parent+'|'+key, tr, html, index)
+            [html, outputs, index] = parser(api_id, outputs, json[key], parent+'|'+key, tr, is_insert, html, index)
     elif isinstance(json, list):
         for item in json:
-            [html, index] = parser(item, outputs, parent+'|#int#', tr , html, index)
+            [html, outputs, index] = parser(api_id, outputs, item, parent+'|#int#', tr , is_insert, html, index)
     else:
         match = False
         name_t   = hstring.get_output_name(parent)
@@ -25,12 +27,39 @@ def parser(json, outputs, parent=parent, tr=['root|properties|#int#|id'], html='
                 html  += '<tr><td>i is :' + str(index) +'</td><td>'
                 break
 
+        sjson = str(json)
+        cn_name = ''
         for item in outputs:
             if item['parent'] == parent_t and item['name'] == name_t:
                 match = True
-                html += item['cn_name'] + '(' + name_t + ')' + json + '<br>'
+                cn_name = item['cn_name']
                 break
 
-        if match == False:
-            html += parent + ':' + str(json) + '<br>'
-    return [html, index]
+        if match == False and parent != 'root|status':
+            if is_insert != True:
+                html += '<font color="red">数据库字段缺失：</font>' + parent + ':' + sjson + '<br>'
+            else:
+                output = {
+                        'name'   : name_t,
+                        'type'   : type(json).__name__,
+                        'parent' : parent_t,
+                        'api_id' : api_id,
+                        }
+                query.add_outputs(output)
+                outputs = query.get_outputs(api_id)
+
+        if match == True or is_insert == True:
+            html_t = cn_name
+            if name_t != '#int#':
+                html_t += '(' + name_t + '):'
+
+            if parent_t == 'root':
+                html += '<tr><td>' + cn_name + '(' + name_t + ')</td><td>' + sjson + '</td></tr>'
+            else:
+                if sjson[-4:] in ['.jpg', '.png', '.bmp']:
+                    html += html_t + '<img src=' + sjson + '>'
+                else:
+                    html += html_t + sjson
+                html += '<br>'
+
+    return [html, outputs, index]
