@@ -20,6 +20,12 @@ def parser(outputs, json,tr=tr, api_id=0, parent=parent, html='',error='', index
     error    解析过程中的报错，包括字段缺失，类型不符等
     index    表示结果序号，比如第几套房源
 
+    逻辑如下：
+    1.如果json类型是dict或者list说明没到叶子节点，继续递归
+    2.否则先检测当前节点是否是分割符节点
+      然后检测db里是否有该节点记录，如果没有并且不是root|status，并且api_id为0就报错，如果api_id不是0就插入
+      如果db有该节点或者api_id大于0，则检查其类型并展示
+
     '''
     if isinstance(json, dict):
         for key in json:
@@ -36,7 +42,7 @@ def parser(outputs, json,tr=tr, api_id=0, parent=parent, html='',error='', index
                 index += 1
                 if index != 1:
                     html += '</td></tr>'
-                html  += '<tr><td>i is :' + str(index) +'</td><td>'
+                html  += '<tr><td>' + str(index) +'</td><td>'
                 break
 
         cn_name    = ''
@@ -54,7 +60,9 @@ def parser(outputs, json,tr=tr, api_id=0, parent=parent, html='',error='', index
 
         if match == False and parent != 'root|status':
             if api_id == 0:
-                error_lack = '<font color="red">数据库字段缺失：</font>' + parent + ':' + sjson + '<br>'
+                error_lack = '<font color="red">数据库字段缺失：</font>' + parent + '<br>'
+                if parent_t == 'root':
+                    error_lack = '<tr><td></td><td>%s</td><tr>'% error_lack
                 error  += error_lack
                 html   += error_lack
             else:
@@ -67,7 +75,7 @@ def parser(outputs, json,tr=tr, api_id=0, parent=parent, html='',error='', index
                 query.add_outputs(output)
                 outputs = query.get_outputs(api_id)
 
-        if match == True or api_id > 0:
+        if parent!='root|status' and (match == True or api_id > 0):
             html_t = cn_name
             if name_t != '#int#':
                 html_t += '(' + name_t + '):'
