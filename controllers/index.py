@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 __author__ = 'yuetingqian'
 
 from config.settings import render

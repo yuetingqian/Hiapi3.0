@@ -1,0 +1,40 @@
+<%inherit file="base.html"/>
+<%block name="header">
+  <link href="/static/css/pages/apiList.css" rel="stylesheet">
+</%block>
+<%block name="body">
+<div class="starter-template">
+  <%include file="/components/_app_version_select.html"/>
+  <br>
+  <table class="table table-hover">
+    <tr>
+      <td>id</td>
+      <td>name</td>
+      <td>version</td>
+      <td>method</td>
+      <td>category</td>
+      <td>is_login</td>
+      <td>operate</td>
+    </tr>
+    % for item in data['list']:
+    <tr>
+      <td>${item['id']}</td>
+      <td>
+        % if not item['auto_type']:
+        <span class="red">${item['name']}</span>
+        % else: 
+        ${item['name']}
+        % endif
+      </td>
+      <td>${item['version']}</td>
+      <td>${item['method']}</td>
+      <td>${item['category']}</td>
+      <td>${item['is_login']}</td>
+      <td></td>
+    </tr>
+    % endfor
+  </table>
+</div>
+<script>
+</script>
+</%block>
